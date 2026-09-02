@@ -13,10 +13,12 @@ int main()
 	    if(N>=2)
 	    {
 	    rem=N%2;
-	    tot= (N/2)*30 + rem*10;
+	    tot= (N/2)*30 + rem*20;
 	    }
 	    else if(N==1)
+	    {
 	    tot = N*20;
+	    }
 	    cout<<tot<<endl;
 	}
 	return 0;

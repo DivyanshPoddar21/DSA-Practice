@@ -51,7 +51,7 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-02T14:52:45.752Z  
+**Submitted:** 2026-09-02T15:29:31.146Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -62,7 +62,7 @@ int main()
 	// your code goes here
 	int T;
 	cin>>T;
-	while(T>0)
+	while(T--)
 	{
 	    int N,K;
 	    cin>>N>>K;
@@ -71,6 +71,21 @@ int main()
 	    {
 	        cin>>arr[i];
 	    }
+	    int W = N-K;
+	    long max_sum=0;
+	    for(int i=0;i<=K;i++)
+	    {
+	        long current_sum=0;
+	        for(int j=i;j<i+W;j++)
+	        {
+	            current_sum+=arr[j];
+	        }
+	        if(current_sum>max_sum)
+	        {
+	        max_sum=current_sum;
+	        }
+	    }
+	    cout<<max_sum<<endl;
 	}
 
 }

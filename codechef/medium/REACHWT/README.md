@@ -52,7 +52,7 @@ Output
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-02T14:44:33.196Z  
+**Submitted:** 2026-09-02T14:43:00.308Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -70,7 +70,7 @@ int main()
 	    if(N>=2)
 	    {
 	    rem=N%2;
-	    tot= (N/2)*30 + rem*20;
+	    tot= (N/2)*30 + rem*10;
 	    }
 	    else if(N==1)
 	    {

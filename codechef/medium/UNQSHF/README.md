@@ -74,7 +74,7 @@ So, no solution exists.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T15:26:38.540Z  
+**Submitted:** 2026-09-09T15:36:28.171Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -83,6 +83,32 @@ using namespace std;
 int main()
 {
 	// your code goes here
+	int T;
+	cin>>T;
+	while(T--)
+	{
+	    int N;
+	    cin>>N;
+	    string A,B;
+	    cin>>A;
+	    cin>>B;
+	    int a_count=0,b_count=0;
+	    for(char c:A)
+	    {
+	       if(c=='a')
+	       a_count++;
+	    }
+	    for(char c:B)
+	    {
+	       if(c=='b')
+	       b_count++;
+	    }
+	    if(a_count==b_count)
+	    cout<<"YES"<<endl;
+	    else
+	    cout<<"NO"<<endl;
+	}
+	return 0;
 
 }
 

@@ -16,43 +16,54 @@ void solve() {
     }
     
     int k = (n + 1) / 2;
-    int min_p = pos[1];
-    int max_p = pos[1];
+    vector<int> min_p(k + 1);
+    vector<int> max_p(k + 1);
     
-    // Step 1: Check if a valid sequence is possible
+    // Track the absolute required boundary for each step i
+    min_p[1] = pos[1];
+    max_p[1] = pos[1];
+    for (int i = 2; i <= k; i++) {
+        min_p[i] = min(min_p[i - 1], pos[i]);
+        max_p[i] = max(max_p[i - 1], pos[i]);
+    }
+    
+    // Step 1: Check if a valid sequence is possible globally
     for (int i = 1; i <= k; i++) {
-        min_p = min(min_p, pos[i]);
-        max_p = max(max_p, pos[i]);
-        
-        int required_length = max_p - min_p + 1;
-        if (required_length > 2 * i - 1) {
+        if (max_p[i] - min_p[i] + 1 > 2 * i - 1) {
             cout << -1 << "\n";
             return;
         }
     }
     
-    // Step 2: Construct and print the subarrays
-    int L = pos[1];
-    int R = pos[1];
-    cout << L << " " << R << "\n";
+    // Step 2: Construct backwards to avoid sub-optimal padding
+    vector<pair<int, int>> ans(k + 1);
+    ans[k] = {1, n};
     
-    for (int i = 2; i <= k; i++) {
-        L = min(L, pos[i]);
-        R = max(R, pos[i]);
+    int L = 1, R = n;
+    
+    for (int i = k; i >= 2; i--) {
+        // We need to form the (i-1)-th subarray of length 2i - 3
+        int target_len = 2 * i - 3; 
         
-        // Pad the subarray until its length is exactly 2i - 1
-        while (R - L + 1 < 2 * i - 1) {
-            if (L > 1) {
-                L--;
-            } else if (R < n) {
-                R++;
+        // Safely shrink the current boundaries by 2 without violating requirements
+        while (R - L + 1 > target_len) {
+            if (L < min_p[i - 1]) {
+                L++;
+            } else if (R > max_p[i - 1]) {
+                R--;
             }
         }
-        cout << L << " " << R << "\n";
+        ans[i - 1] = {L, R};
+    }
+    
+    // Step 3: Print in the correct forward order
+    for (int i = 1; i <= k; i++) {
+        cout << ans[i].first << " " << ans[i].second << "\n";
     }
 }
 
 int main() {
+    // Fast I/O
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     

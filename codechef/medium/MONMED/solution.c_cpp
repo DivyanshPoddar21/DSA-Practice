@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> p(n + 1);
+    vector<int> pos(n + 1);
+    
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i];
+        pos[p[i]] = i;
+    }
+    
+    int k = (n + 1) / 2;
+    int min_p = pos[1];
+    int max_p = pos[1];
+    
+    // Step 1: Check if a valid sequence is possible
+    for (int i = 1; i <= k; i++) {
+        min_p = min(min_p, pos[i]);
+        max_p = max(max_p, pos[i]);
+        
+        int required_length = max_p - min_p + 1;
+        if (required_length > 2 * i - 1) {
+            cout << -1 << "\n";
+            return;
+        }
+    }
+    
+    // Step 2: Construct and print the subarrays
+    int L = pos[1];
+    int R = pos[1];
+    cout << L << " " << R << "\n";
+    
+    for (int i = 2; i <= k; i++) {
+        L = min(L, pos[i]);
+        R = max(R, pos[i]);
+        
+        // Pad the subarray until its length is exactly 2i - 1
+        while (R - L + 1 < 2 * i - 1) {
+            if (L > 1) {
+                L--;
+            } else if (R < n) {
+                R++;
+            }
+        }
+        cout << L << " " << R << "\n";
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
+}

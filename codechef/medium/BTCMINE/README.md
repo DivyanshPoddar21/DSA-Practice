@@ -65,14 +65,43 @@ It can be verified that there's no way to make a positive profit by the end of t
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T15:41:05.852Z  
+**Submitted:** 2026-09-09T16:13:05.693Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-	// your code goes here
+int main()
+{
+	int T;
+	cin>>T;
+	while(T--)
+	{
+	    int X,Y;
+	    long cost,revenue;
+	    cin>>X>>Y;
+	    long min_days = 1e9;
+	    for(int K=1;K<=200;K++)
+	    {
+	       cost= K*X; 
+	       revenue= Y*(((K)*(K+1)*(2*K+1))/6);
+	       long current_days;
+	       if((revenue-cost)>0)
+	       {
+	           current_days=K;
+	       }
+	       else
+	       {
+	           long deficit = cost-revenue;
+	           long daily_income= Y*K*K;
+	           long extra_days= (deficit + daily_income)/daily_income;
+	           current_days = K+ extra_days;
+	       }
+	       min_days= min(min_days, current_days);
+	    }
+	    cout<<min_days<<endl;
+	}
+	return 0;
 
 }
 

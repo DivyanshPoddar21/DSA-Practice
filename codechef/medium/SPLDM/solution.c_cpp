@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    
+    // DP states initialized. -1e9 acts as negative infinity.
+    int dp0 = 0;
+    int dp1 = -1e9;
+    int dp2 = -1e9;
+    
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        
+        int next_dp0 = max({dp0, dp1, dp2});
+        int next_dp1 = -1e9;
+        int next_dp2 = -1e9;
+        
+        if (x == 3) {
+            next_dp1 = 1 + max({dp0, dp1, dp2});
+        } 
+        else if (x == 2) {
+            next_dp1 = 1 + max(dp0, dp1);
+            next_dp2 = 1 + dp2;
+        } 
+        else if (x == 1) {
+            next_dp2 = 1 + max(dp0, dp1);
+        }
+        
+        // Move to the next step
+        dp0 = next_dp0;
+        dp1 = next_dp1;
+        dp2 = next_dp2;
+    }
+    
+    cout << max({dp0, dp1, dp2}) << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}

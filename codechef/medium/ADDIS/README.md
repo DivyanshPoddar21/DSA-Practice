@@ -77,7 +77,7 @@ It can be shown that this is optimal.
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-09T14:55:03.421Z  
+**Submitted:** 2026-09-09T15:13:02.229Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
@@ -90,8 +90,32 @@ int main()
 	cin>>T;
 	while(T--)
 	{
+	    int N;
+	    cin>>N;
+	    int arr[N];
+	    for(int i=0;i<N;i++)
+	    {
+	        cin>>arr[i];
+	    }
+	    sort(arr, arr+N);
+	    int max_freq=1,curr_freq=1;
 	    
+	    for(int i=1; i<N;i++)
+	    {
+	        if(arr[i]==arr[i-1])
+	        {
+	            curr_freq++;
+	        }
+	        else
+	        {
+	            max_freq = max(max_freq,curr_freq);
+	            curr_freq=1;
+	        }
+	    }
+	    max_freq = max(max_freq,curr_freq);
+	    cout<<(max_freq+1)/2<<endl;
 	}
+	return 0;
 
 }
 

@@ -48,7 +48,7 @@ COLD
 **Language:** c_cpp  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-02T13:26:33.616Z  
+**Submitted:** 2026-09-21T06:33:59.763Z  
 
 ```c_cpp
 #include <bits/stdc++.h>
